@@ -17,7 +17,8 @@ public class EntityDAO {
 			this.daoFactory = daoFactory;
 		}
 		Connection conn=null;
-		public void insertEntity(Entity entity){
+		public int insertEntity(Entity entity) throws SQLException{
+			int affectedRows=0;
 			try {
 				conn=daoFactory.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(SQL_INSERT);
@@ -25,14 +26,12 @@ public class EntityDAO {
 				pstmt.setString(2, entity.getEntityName());
 				pstmt.setString(3, entity.getEntityDesc());
 				pstmt.setString(4, entity.getEntityType());
-				pstmt.setDate(5, entity.getDateCreated());;
+				pstmt.setTimestamp(5, entity.getDateCreated());;
 				pstmt.setString(6, entity.getCreatedBy());
 				
-				int affectedRows=pstmt.executeUpdate();
+				affectedRows=pstmt.executeUpdate();
 				
-				if(affectedRows==0){
-					System.out.println("Creating Entity Failed");
-				}
+				
 			} catch (SQLException e) {
 				if(conn!=null){
 					try {
@@ -42,7 +41,9 @@ public class EntityDAO {
 						e1.printStackTrace();
 					}
 				}
-				e.printStackTrace();
+				throw e;
 			}
+			return affectedRows;
+			
 		}
 }

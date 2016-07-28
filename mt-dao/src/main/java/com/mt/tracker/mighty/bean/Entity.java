@@ -1,6 +1,7 @@
 package com.mt.tracker.mighty.bean;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 public class Entity {
 	
@@ -11,7 +12,7 @@ public class Entity {
 		private String EntityName;
 		private String EntityDesc;
 		private String EntityType;
-		private Date DateCreated;
+		private Timestamp DateCreated;
 		private String CreatedBy;
 		
 		public int getEntityId() {
@@ -38,10 +39,10 @@ public class Entity {
 		public void setEntityType(String entityType) {
 			EntityType = entityType;
 		}
-		public Date getDateCreated() {
+		public Timestamp getDateCreated() {
 			return DateCreated;
 		}
-		public void setDateCreated(Date dateCreated) {
+		public void setDateCreated(Timestamp dateCreated) {
 			DateCreated = dateCreated;
 		}
 		public String getCreatedBy() {

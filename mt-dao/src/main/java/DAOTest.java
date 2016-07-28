@@ -1,4 +1,6 @@
-import java.sql.Date;
+
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.mt.tracker.mighty.bean.Entity;
 import com.mt.tracker.mighty.dao.DAOFactory;
@@ -20,12 +22,22 @@ public class DAOTest {
 		ent.setEntityName("Changi Hospital");
 		ent.setEntityDesc("Changi general Hospital in Healthcaresector");
 		ent.setEntityType(null);
-		ent.setDateCreated(new Date(27, 7, 16));
+		ent.setDateCreated(new Timestamp(System.currentTimeMillis()));
 		ent.setCreatedBy("Admin");
 		System.out.println("Bean created");
-		entDAO.insertEntity(ent);
-		System.out.println("Record inserted successfully");
+		int result;
+		try {
+			result = entDAO.insertEntity(ent);
+			if(result==0){
+				System.out.println("Creating Entity Failed");
+			}else{
+			System.out.println("Record inserted successfully");
+			}
 		
-	}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 
 }
